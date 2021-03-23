@@ -1,7 +1,7 @@
 Tutorial: Data on Manifolds
 ===========================
 .. image:: https://mybinder.org/badge_logo.svg
- :target: https://mybinder.org/v2/gh/geomstats/geomstats/master
+ :target: https://hub-binder.mybinder.ovh/user/geomstats-geomstats-pl95cyfd/notebooks/notebooks/01_data_on_manifolds.ipynb
 Setup
 -----
 
