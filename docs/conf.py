@@ -17,7 +17,9 @@ extensions = [
     'sphinx.ext.githubpages',
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
-    'sphinx.ext.viewcode'
+    'sphinx_gallery.load_style',  # load CSS for gallery (needs SG >= 0.6)
+    'sphinx.ext.viewcode',
+    
 ]
 
 # Configure napoleon for numpy docstring
@@ -31,6 +33,32 @@ napoleon_include_init_with_doc = False
 # Configure nbsphinx for notebooks execution
 nbsphinx_execute = 'never'
 nbsphinx_allow_errors = True
+
+# To get a prompt similar to the Classic Notebook, use
+nbsphinx_input_prompt = ' In [%s]:'
+nbsphinx_output_prompt = ' Out [%s]:'
+
+# This is processed by Jinja2 and inserted before each notebook
+nbsphinx_prolog = r"""
+{% set docname = 'notebooks/' + env.doc2path(env.docname, base=None) %}
+
+.. raw:: html
+
+    <div class="admonition note">
+      <p>Notebook source code:
+        <a class="reference external" href="https://github.com/geomstats/geomstats/blob/master/notebooks>{{ docname|e }}</a>
+        <br>Run it yourself on binder
+        <a href="https://hub-binder.mybinder.ovh/user/geomstats-geomstats-hgpq7inb/notebooks/notebooks/01_data_on_manifolds.ipynb"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>
+      </p>
+    </div>
+
+.. raw:: latex
+
+    \nbsphinxstartnotebook{\scriptsize\noindent\strut
+    \textcolor{gray}{The following section was generated from
+    \sphinxcode{\sphinxupquote{\strut {{ docname | escape_latex }}}} \dotfill}}
+"""
+
 
 templates_path = ['_templates']
 
